@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="space">
   <head>
     <title>SPACE</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="js/app.js"></script>
   </head>
-  <body>
-    <h1>Hello {{ 2 + 2 }}</h1>
+  <body ng-controller="Main">
+    <h1>Hello {{ 2 + 2 }}. Today is {{ today | date }}</h1>
   </body>
 </html>
