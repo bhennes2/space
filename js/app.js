@@ -3,12 +3,24 @@ var app = angular.module('space', ['ngResource', 'ngSanitize']);
 app.factory("CMS", function($resource){
   return $resource('/proxy/locomotive/api/v3/:path/:content_type/:subpath', {},
     {
+      homePage: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          path: 'pages.json'
+        },
+        headers: {
+          "X-Locomotive-Account-Email": "dev@launchpadlab.com",
+          "X-Locomotive-Account-Token": "UTqEUsnvqq8aGtG131sb",
+          "X-Locomotive-Site-Handle": "space"
+        }
+      },
       missions: {
         method: 'GET',
         isArray: true,
         params: {
           path: 'content_types',
-          'content_type': 'missions',
+          content_type: 'missions',
           subpath: 'entries.json'
         },
         headers: {
@@ -38,8 +50,14 @@ app.factory("CMS", function($resource){
 });
 
 app.controller("Main", function($scope, CMS){
-  $scope.today = new Date();
-
+  $scope.now = new Date();
+  $scope.page = {};
   $scope.missions = CMS.missions();
-
+  CMS.homePage(function(pages){
+    angular.forEach(pages, function(page){
+      if (page.fullpath === 'index'){
+        $scope.page = page;
+      }
+    });
+  });
 });
