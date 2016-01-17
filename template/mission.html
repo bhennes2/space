@@ -1,0 +1,133 @@
+<header class="page-header mission">
+  <div class="header-container">
+    <img src="{{ mission.mission_patch }}" alt='mission-patch' class="badge"/>
+    <div class="mission-intro">
+      <h1 class="underline-header-white">{{ mission.name }}</h1>
+      <p class="subheader">{{ mission.teaser_description }}</p>
+    </div>
+  </div>
+</header>
+<section class="mission-description-container">
+  <div class="description-text">
+    <h5>How it all Started</h5>
+    <p ng-bind-html="mission.description"></p>
+  </div>
+  <img ng-src="{{ mission.primary_image }}" class="primary-image" ng-if="mission.primary_image">
+  <img ng-if="!mission.primary_image" ng-src="" class="primary-image">
+</section>
+
+<section class="mission-details" style="background-color: {{ mission.primary_color }};">
+  <ul class="mission-details-container">
+    <li class="detail-block">
+      <i class="{{ mission.mission_type }}-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">Mission Type</h4>
+        <p class="subheader">{{ mission.mission_type }}</p>
+      </div>
+    </li>
+    <li class="detail-block">
+      <i class="telescope-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">Website</h4>
+        <a href="{{ mission.website }}" target="_blank" class="subheader">View Live</a>
+      </div>
+    </li>
+    <li class="detail-block">
+      <i class="landing-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">State</h4>
+        <p class="subheader">{{ mission.state }}</p>
+        <P class="subheader">{{ mission.launch_date }}</P>
+      </div>
+    </li>
+    <li class="detail-block">
+      <i class="astronaut-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">Commander</h4>
+        <p class="subheader">{{ mission.commander }}</p>
+      </div>
+    </li>
+    <li class="detail-block">
+      <i class="crew-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">Crew</h4>
+        <p>
+          <ul>
+            <li ng-repeat="astronaut in mission.crew" class="subheader">{{ astronaut.name }}</li>
+          </ul>
+        </p>
+      </div>
+    </li>
+    <li class="detail-block">
+      <i class="space-gun-medium"></i>
+      <div class="block-text">
+        <h4 class="underline-header">Tools & Methods</h4>
+        <p class="subheader">{{ mission.tools_and_methods }}</p>
+      </div>
+    </li>
+  </ul>
+</section>
+<section class="secondary-media-container">
+  <div class="secondary-media">
+    <img ng-src="{{ mission.tutorial_image }}" class="secondary-image" ng-if="mission.tutorial_image">
+    <img ng-if="!mission.tutorial_image" class="secondary-image">
+  </div>
+</section>
+
+<!--   <section class="gallery">
+    <ul class="gallery-slider">
+      {% for media in mission.media %}
+        <li class="main-slider-image"><img src="{{ media.asset.url }}"></li>
+      {% endfor %}
+    </ul>
+  </section> -->
+
+
+  <section class="blog-container" ng-if="mission.blog_post_title">
+    <img ng-src="{{ mission.blog_post_image }}" class="blog-thumbnail">
+    <div class="blog-text">
+      <h4>{{ mission.blog_post_title }}</h4>
+      <p class="teaser">{{ mission.blog_post_teaser }}</p>
+      <a href="{{ mission.blog_post }}" target="_blank" class="button-black-outline button-arrow">Read More</a>
+    </div>
+  </section>
+
+  <section class="more-missions" style="background-color: {{ mission.primary_color }}">
+    <ul class="more-missions-container">
+      <h2>Check out more missions</h2>
+      <li class="more-block">
+        <i class="Flyby-medium"></i>
+        <div class="block-text">
+          <h4 class="underline-header">Flybys</h4>
+          <ul>
+            <li ng-repeat="m in missions" ng-if="m.mission_type == 'Flyby'">
+              <a ui-sref="mission({ slug: m._slug })" class="link-white-base">{{ m.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="more-block">
+        <i class="Rocket-medium"></i>
+        <div class="block-text">
+          <h4 class="underline-header">Rockets</h4>
+          <ul>
+            <li ng-repeat="m in missions" ng-if="m.mission_type == 'Rocket'">
+              <a ui-sref="mission({ slug: m._slug })" class="link-white-base">{{ m.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="more-block">
+        <i class="Satellite-medium"></i>
+        <div class="block-text">
+          <h4 class="underline-header">Satellites</h4>
+          <ul>
+            <li ng-repeat="m in missions" ng-if="m.mission_type == 'Satellite'">
+              <a ui-sref="mission({ slug: m._slug })" class="link-white-base">{{ m.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </section>
+

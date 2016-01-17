@@ -1,0 +1,108 @@
+<header class="page-header">
+  <div class="text-container">
+    <img src="https://space-station.s3.amazonaws.com/sites/566b5aa0d7bcec0003000001/theme/images/space-hero.svg" class="home-logo">
+  </div>
+</header>
+<section class="text-block-container">
+  <h2>{{ page.editable_elements[0].content }}</h2>
+  <p class="subheader">
+    {{ page.editable_elements[1].content }}
+  </p>
+</section>
+<section>
+  <div class="filter-wrapper">
+    <div class="button-group filters-button-group filter-container">
+      <button class="button1 is-checked" data-filter="*">
+        <h4 class="underline-header">All Missions</h4>
+        <p>We love learning and constantly experimenting.</p>
+      </button>
+      <button class="button1" data-filter=".Flyby">
+        <h4 class="underline-header">Flybys</h4>
+        <p>Experimental. Fun. Quick hacks or demos.</p>
+      </button>
+      <button class="button1" data-filter=".Rocket">
+        <h4 class="underline-header">Rockets</h4>
+        <p>Get stuff from point A to point B. Gems. Slack Integrations.</p>
+      </button>
+      <button class="button1" data-filter=".Satellite">
+        <h4 class="underline-header">Satellites</h4>
+        <p>Products and businesses built to last.</p>
+      </button>
+    </div>
+  </div>
+  <ul class="grid grid-container">
+    <li ng-repeat="mission in missions" class="element-item {{ mission.mission_type }}" data-category="transition">
+      <a ui-sref="mission({ slug: mission._slug })">
+        <img ng-src="{{ mission.mission_patch }}" alt='mission-patch' class="preview-badge">
+        <div class="preview-text">
+          <h5>{{ mission.name }}</h5>
+          <p>{{ mission.teaser_description }}</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</section>
+<section class="countdown-wrapper">
+  <div class="countdown-container">
+    <h2>Next Demo Day</h2>
+    <ul class="countdown">
+      <li>
+        <span class="days"></span>
+        <p class="timeRefDays"></p>
+      </li>
+      <li>
+        <span class="hours"></span>
+        <p class="timeRefHours"></p>
+      </li>
+      <li>
+        <span class="minutes"></span>
+        <p class="timeRefMinutes"></p>
+      </li>
+      <li>
+        <span class="seconds"></span>
+        <p class="timeRefSeconds"></p>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="space-gallery">
+  <div class="image-block"></div>
+  <div class="image-blocks">
+    <div class="top-row">
+      <div class="image1"></div>
+      <div class="image2"></div>
+    </div>
+    <div class="bottom-row">
+      <div class="image1"></div>
+      <div class="image2"></div>
+    </div>
+  </div>
+</section>
+<section class="why-space">
+  <div class="text-block-container">
+    <h2>
+      {{ page.editable_elements[2].content }}
+    </h2>
+    <p class="subheader">
+      {{ page.editable_elements[3].content }}
+    </p>
+  </div>
+</section>
+
+<section class="contact-container">
+  <div class="contact-block">
+    <h3>{{ page.editable_elements[4].content }}</h3>
+    <p>
+      {{ page.editable_elements[5].content }}
+    </p>
+    <a href="#" class="button-black-outline button-arrow">Get in Touch</a>
+  </div>
+  <div class="saturn"><p><span>Or</span></p></div>
+  <div class="contact-block">
+    <h3>{{ page.editable_elements[6].content }}</h3>
+    <p>
+      {{ page.editable_elements[7].content }}
+    </p>
+    <a href="#" class="button-black-outline button-arrow">Get in Touch</a>
+  </div>
+</section>

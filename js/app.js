@@ -1,4 +1,4 @@
-var app = angular.module('space', ['ngResource', 'ngSanitize']);
+var app = angular.module('space', ['ngResource', 'ngSanitize', 'ui.router']);
 
 app.factory("CMS", function($resource){
   return $resource('http://space.launchpadlab.com/locomotive/api/v3/:path/:content_type/:subpath', {},
@@ -52,7 +52,9 @@ app.factory("CMS", function($resource){
 app.controller("Main", function($scope, CMS){
   $scope.now = new Date();
   $scope.page = {};
-  $scope.missions = CMS.missions();
+  $scope.missions = CMS.missions(function(data){
+    // $('.grid-container').css('height', '600px');
+  });
   CMS.homePage(function(pages){
     angular.forEach(pages, function(page){
       if (page.fullpath === 'index'){
@@ -60,4 +62,47 @@ app.controller("Main", function($scope, CMS){
       }
     });
   });
+});
+
+app.controller("Mission", function($scope, $stateParams, CMS){
+  $scope.missions = CMS.missions(function(missions){
+    angular.forEach(missions, function(mission){
+      if (mission._slug === $stateParams.slug){
+        $scope.mission = mission;
+      }
+    })
+  });
+});
+
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
+  $urlMatcherFactoryProvider.strictMode(false);
+  if (window.navigator.appVersion.indexOf('MSIE 9.0') === -1){
+    $locationProvider.html5Mode(true);
+  }
+  $locationProvider.hashPrefix('!');
+  $urlRouterProvider.otherwise("/");
+
+  $stateProvider
+    .state('app', {
+      url: '/',
+      views: {
+        header: { templateUrl: "template/header.html" },
+        content: {
+          templateUrl: "template/main.html",
+          controller: "Main"
+        },
+        footer: { templateUrl: "template/footer.html" }
+      }
+    })
+    .state('mission', {
+      url: "/missions/:slug",
+      views: {
+        header: { templateUrl: "template/header.html" },
+        content: {
+          controller: 'Mission',
+          templateUrl: "template/mission.html"
+        },
+        footer: { templateUrl: "template/footer.html" }
+      }
+    });
 });
