@@ -65,6 +65,7 @@ app.controller("Main", function($scope, CMS){
 });
 
 app.controller("Mission", function($scope, $stateParams, CMS){
+
   $scope.missions = CMS.missions(function(missions){
     angular.forEach(missions, function(mission){
       if (mission._slug === $stateParams.slug){
@@ -76,9 +77,7 @@ app.controller("Mission", function($scope, $stateParams, CMS){
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
   $urlMatcherFactoryProvider.strictMode(false);
-  if (window.navigator.appVersion.indexOf('MSIE 9.0') === -1){
-    $locationProvider.html5Mode(true);
-  }
+
   $locationProvider.hashPrefix('!');
   $urlRouterProvider.otherwise("/");
 

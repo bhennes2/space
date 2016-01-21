@@ -31,7 +31,7 @@
     </div>
   </div>
   <ul class="grid grid-container">
-    <li ng-repeat="mission in missions" class="element-item {{ mission.mission_type }}" data-category="transition">
+    <li ng-if="mission._visible" ng-repeat="mission in missions" class="element-item {{ mission.mission_type }}" data-category="transition">
       <a ui-sref="mission({ slug: mission._slug })">
         <img ng-src="{{ mission.mission_patch }}" alt='mission-patch' class="preview-badge">
         <div class="preview-text">
