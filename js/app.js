@@ -1,7 +1,7 @@
 var app = angular.module('space', ['ngResource', 'ngSanitize', 'ui.router']);
 
 app.factory("CMS", function($resource){
-  return $resource('http://space.launchpadlab.com/locomotive/api/v3/:path/:content_type/:subpath', {},
+  return $resource('https://space.launchpadlab.com/locomotive/api/v3/:path/:content_type/:subpath', {},
     {
       homePage: {
         method: 'GET',
